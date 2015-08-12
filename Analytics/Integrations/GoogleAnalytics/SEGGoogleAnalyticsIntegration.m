@@ -98,7 +98,7 @@
       [[[GAI sharedInstance] defaultTracker] set:key value:obj];
     }];
 
-    [self setCustomDimensionsAndMetricsOnDefaultTracker:traits]
+    [self setCustomDimensionsAndMetricsOnDefaultTracker:traits];
 }
 
 - (void)track:(NSString *)event properties:(NSDictionary *)properties options:(NSDictionary *)options
@@ -192,18 +192,18 @@
 - (void)setCustomDimensionsAndMetrics:(NSDictionary *)properties onHit:(GAIDictionaryBuilder *)hit
 {
     NSDictionary *customDimensions = self.settings[@"dimensions"];
-    NSDictionary *customMetrics = self.settings[@"metrics"]
+    NSDictionary *customMetrics = self.settings[@"metrics"];
 
     for (NSString *key in properties) {
         if ([customDimensions objectForKey:key] != nil) {
             NSString *dimension = [customDimensions objectForKey:key];
             [hit set: [properties objectForKey:key]
-              forKey: [GAIFields customDimensionForIndex:[dimension integerValue]]]
+              forKey: [GAIFields customDimensionForIndex:[dimension integerValue]]];
         }
         if ([customMetrics objectForKey:key] != nil) {
             NSString *metric = [customMetrics objectForKey:key];
             [hit set: [properties objectForKey:key]
-              forKey: [GAIFields customMetricForIndex:[metric integerValue]]]
+              forKey: [GAIFields customMetricForIndex:[metric integerValue]]];
         }
     }
 }
@@ -212,18 +212,18 @@
 - (void)setCustomDimensionsAndMetricsOnDefaultTracker:(NSDictionary *)traits
 {
     NSDictionary *customDimensions = self.settings[@"dimensions"];
-    NSDictionary *customMetrics = self.settings[@"metrics"]
+    NSDictionary *customMetrics = self.settings[@"metrics"];
 
     for (NSString *key in traits) {
         if ([customDimensions objectForKey:key] != nil) {
             NSString *dimension = [customDimensions objectForKey:key];
             [[[GAI sharedInstance] defaultTracker] set: [GAIFields customDimensionForIndex:[dimension integerValue]]
-                                                 value: [traits objectForKey:key]]
+                                                 value: [traits objectForKey:key]];
         }
         if ([customMetrics objectForKey:key] != nil) {
             NSString *metric = [customMetrics objectForKey:key];
             [[[GAI sharedInstance] defaultTracker] set: [GAIFields customMetricForIndex:[metric integerValue]]
-                                                 value: [traits objectForKey:key]]
+                                                 value: [traits objectForKey:key]];
         }
     }
 }
