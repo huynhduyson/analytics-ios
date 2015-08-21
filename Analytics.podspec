@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
 
       (a.dependencies || []).each do |d|
         if d.version
-          ss.dependency d.name, d.version
+          ss.dependency d.name
         else
           ss.dependency d.name
         end
